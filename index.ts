@@ -26,11 +26,12 @@ class Scrapper {
                     content.find('ul.req-drop-list > li').each((i,req) => {
                          test = $(req).attr('title');
                          if(test){
+                            test.replace(' required','');    
                             airdrop_requirment[test] = true;
                          }
                     });
 
-                    
+
                     console.log(airdrop_requirment);
                     console.log('------------------------------------------------------------------')
                 });
