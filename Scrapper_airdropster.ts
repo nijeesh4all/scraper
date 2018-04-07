@@ -16,7 +16,7 @@ class Scrapper_airdropster {
                     let airdrop_object = {};
                     let test;
                     const airdrop_div = $(element);
-                    const airdrop_logo = airdrop_div.find('logo-campaign not-mobile').html()
+                    const airdrop_logo = airdrop_div.find('logo-campaign').first().html()
                     console.log(airdrop_logo);
                 })
             }
