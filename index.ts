@@ -18,7 +18,7 @@ const config = {
 new Scrapper_airdrop_io('https://airdrops.io/latest/').scrap(updateToFirebase);
 new Scrapper_airdropster('https://www.airdropster.com/?sort=rating').scrap(updateToFirebase);
 
-
+let count =0;
 function updateToFirebase(object){
     const update ={};
     const id = randomString(5,'#aA')
@@ -27,7 +27,7 @@ function updateToFirebase(object){
     update[id] = object;
     database.ref('/toPublish').update(update)
     .then(result => {
-        console.log(object.name+" Added");
+        console.log(count++,") ",object.name+" Added");
     });
 }
 
