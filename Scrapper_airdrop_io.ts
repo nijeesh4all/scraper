@@ -1,8 +1,7 @@
 import * as cheerio from 'cheerio';
 import * as request from 'request'
-import Airdrop from './Airdrop';
 
-class Scrapper_airdrop_io {
+export default class Scrapper_airdrop_io {
     private uri: string;
     constructor(uri : string) {
         this.uri = uri;
@@ -44,4 +43,3 @@ class Scrapper_airdrop_io {
         });      
     }
 }
-export = Scrapper_airdrop_io;
