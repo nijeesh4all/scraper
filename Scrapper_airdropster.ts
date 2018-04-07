@@ -18,6 +18,7 @@ export default class  Scrapper_airdropster {
                     
                     const airdrop_logo = airdrop_div.find('.logo-campaign').first().find('img').attr('src');
                     let airdrop_name = airdrop_div.find('.title').text().split('(');
+                    let reg_url = airdrop_div.find('.title').attr('href');
                     const airdrop_symbol = airdrop_name[1].replace(')','').trim();
                     airdrop_name = airdrop_name[0].trim();
                     
@@ -27,7 +28,8 @@ export default class  Scrapper_airdropster {
                         name : airdrop_name,
                         symbol:airdrop_symbol,
                         value:airdrop_value,
-                        icon_url:airdrop_logo
+                        icon_url:airdrop_logo,
+                        reg_url:reg_url
                     }
                     callback(airdrop_object)
                 })

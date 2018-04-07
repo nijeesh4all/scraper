@@ -11,10 +11,11 @@ export default class Scrapper_airdrop_io {
         request(this.uri , (error,resonse,html) => {
             if(!error && resonse.statusCode ==200) {
                 var $ = cheerio.load(html);
-                $('.air-wrapper').each((i,element) => {
+                $('.inside-article').each((i,element) => {
                     let test :string;
-                    let airdrop_object = {};    
-                    const airdrop = $(element);
+                    let airdrop_object = {};
+                    const reg_url = $(element).attr('onclick').replace('location.href=','').replace("'",'');    
+                    const airdrop = $(element).find('air-wrapper');
                     const img_url = airdrop.find('.air-thumbnail').first().find('img').attr('src');
                     const content = $(airdrop.find('.air-content-front').first());
                     
@@ -34,7 +35,8 @@ export default class Scrapper_airdrop_io {
                         name:airdrop_name,
                         icon_url:img_url,
                         value:airdrop_value,
-                        requirements:airdrop_requirment
+                        requirements:airdrop_requirment,
+                        reg_url:reg_url
                     }
                     
                     callback(airdrop_object)
@@ -43,3 +45,5 @@ export default class Scrapper_airdrop_io {
         });      
     }
 }
+
+new Scrapper_airdrop_io('https://airdrops.io/latest/').scrap(console.log);
