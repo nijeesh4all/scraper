@@ -23,7 +23,14 @@ class Scrapper_airdropster {
                     airdrop_name = airdrop_name[0].trim();
                     
                     const airdrop_value = airdrop_div.find('p.text').html().replace('Estimated value :','').trim();
-                    console.log(airdrop_value);
+
+                    airdrop_object = {
+                        name : airdrop_name,
+                        symbol:airdrop_symbol,
+                        value:airdrop_value,
+                        icon_url:airdrop_logo
+                    }
+                    console.log(airdrop_object);
                 })
             }
         });      
