@@ -37,3 +37,5 @@ export default class  Scrapper_airdropster {
         });      
     }
 }
+
+new Scrapper_airdropster('https://www.airdropster.com/?sort=rating').scrap(console.log)
