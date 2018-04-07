@@ -18,7 +18,7 @@ class Scrapper_airdropster {
                     const airdrop_div = $(element);
                     
                     const airdrop_logo = airdrop_div.find('.logo-campaign').first().find('img').attr('src');
-                    const airdrop_name = airdrop_div.find('.h6 .title').first().text();
+                    const airdrop_name = airdrop_div.find('.title').html() //.first().text();
 
                     console.log(airdrop_logo,'=>',airdrop_name);
                 })
