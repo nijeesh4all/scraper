@@ -19,7 +19,6 @@ new Scrapper_airdrop_io('https://airdrops.io/latest/').scrap(updateToFirebase);
 new Scrapper_airdropster('https://www.airdropster.com/?sort=rating').scrap(updateToFirebase);
 
 
-
 function updateToFirebase(object){
     const update ={};
     const id = randomString(5,'#aA')

@@ -54,5 +54,3 @@ export default class Scrapper_airdrop_io {
         });      
     }
 }
-
-new Scrapper_airdrop_io('https://airdrops.io/latest/').scrap(console.log);
