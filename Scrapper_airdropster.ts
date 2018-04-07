@@ -13,10 +13,11 @@ class Scrapper_airdropster {
             if(!error && resonse.statusCode ==200) {
                 var $ = cheerio.load(html);
                 $('tr').each((i,element) =>{
+                    let airdrop_object = {};
                     let test;
-                    const airdrop = $(element);
-                    test = airdrop.html()
-                    console.log(test);
+                    const airdrop_div = $(element);
+                    const airdrop_logo = airdrop_div.find('logo-campaign not-mobile').first().attr('src');
+                    console.log(airdrop_logo);
                 })
             }
         });      
