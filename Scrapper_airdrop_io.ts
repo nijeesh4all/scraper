@@ -18,7 +18,7 @@ export default class Scrapper_airdrop_io {
                     
                     let reg_url:any = $(element).parent().html().match(regEx);
                     if(reg_url){
-                        reg_url = reg_url[0];
+                        reg_url = reg_url[0].replace('&apos;','');
                     }else{
                         return null;
                     }
