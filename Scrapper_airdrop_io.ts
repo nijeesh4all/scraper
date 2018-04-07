@@ -17,8 +17,8 @@ export default class Scrapper_airdrop_io {
                     const regEx = new RegExp(/&apos[\S]{1,}&apos/g) 
                     
                     let reg_url = $(element).parent().html();
-                    reg_url = regEx.exec(reg_url);
-                    
+                    reg_url = regEx.exec(reg_url)[0];
+
                     const airdrop = $(element).find('.air-wrapper').first();
                     const img_url = airdrop.find('.air-thumbnail').first().find('img').attr('src');
                     const content = $(airdrop.find('.air-content-front').first());
