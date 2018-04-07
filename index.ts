@@ -16,11 +16,11 @@ class Scrapper {
                     let test :string;
 
                     const airdrop = $(element);
-                    //const img_url = airdrop.find('.air-thumbnail').first().find('img').attr('src');
+                    const img_url = airdrop.find('.air-thumbnail').first().find('img').attr('src');
                     const content = $(airdrop.find('.air-content-front').first());
                     
-                    //const airdrop_name = content.find('a > h3').html()
-                    //const airdrop_value  = content.find('.est-value').first().find('span').text()
+                    const airdrop_name = content.find('a > h3').html()
+                    const airdrop_value  = content.find('.est-value').first().find('span').text()
 
                     const airdrop_requirment = {};
                     content.find('ul.req-drop-list > li').each((i,req) => {
@@ -31,8 +31,14 @@ class Scrapper {
                          }
                     });
 
+                    const airdrop_object = {
+                        name:airdrop_name,
+                        icon_url:img_url,
+                        value:airdrop_value,
+                        requirements:airdrop_requirment
+                    }
 
-                    console.log(airdrop_requirment);
+                    console.log(airdrop_object);
                     console.log('------------------------------------------------------------------')
                 });
             }
