@@ -24,7 +24,7 @@ class Scrapper_airdropster {
 }
 
 console.log('Latest');
-new Scrapper_airdropster('https://airdrops.io/latest/').scrap();
+new Scrapper_airdropster('https://www.airdropster.com/?sort=rating').scrap();
 // new Scrapper_airdrop_io('https://airdrops.io/hot/').scrap();
 // new Scrapper_airdrop_io('https://airdrops.io/upcoming/').scrap();
 
