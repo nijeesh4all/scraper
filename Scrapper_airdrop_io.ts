@@ -14,7 +14,7 @@ export default class Scrapper_airdrop_io {
                 $('.inside-article').each((i,element) => {
                     let test :string;
                     let airdrop_object = {};
-                    const reg_url = $(element).parent().attr('onclick').replace('location.href=','').replace("'",'');    
+                    const reg_url = $(element).parent().attr('onclick')//.replace('location.href=','').replace("'",'');    
                     const airdrop = $(element).find('air-wrapper');
                     const img_url = airdrop.find('.air-thumbnail').first().find('img').attr('src');
                     const content = $(airdrop.find('.air-content-front').first());
