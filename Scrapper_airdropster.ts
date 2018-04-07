@@ -8,7 +8,7 @@ class Scrapper_airdropster {
         this.uri = uri;
     }
 
-    scrap() {
+    scrap(callback :Function) {
         request(this.uri , (error,resonse,html) => {
             if(!error && resonse.statusCode ==200) {
                 var $ = cheerio.load(html);
@@ -30,15 +30,11 @@ class Scrapper_airdropster {
                         value:airdrop_value,
                         icon_url:airdrop_logo
                     }
-                    console.log(airdrop_object);
+                    callback(airdrop_object)
                 })
             }
         });      
     }
 }
 
-console.log('Latest');
-new Scrapper_airdropster('https://www.airdropster.com/?sort=rating').scrap();
-// new Scrapper_airdrop_io('https://airdrops.io/hot/').scrap();
-// new Scrapper_airdrop_io('https://airdrops.io/upcoming/').scrap();
-
+export = Scrapper_airdropster;
