@@ -21,7 +21,9 @@ class Scrapper_airdropster {
                     let airdrop_name = airdrop_div.find('.title').text().split('(');
                     const airdrop_symbol = airdrop_name[1].replace(')','').trim();
                     airdrop_name = airdrop_name[0].trim();
-                    console.log(airdrop_symbol,'=>',airdrop_name);
+                    
+                    const airdrop_value = airdrop_div.find('p.text').html();
+                    console.log(airdrop_value);
                 })
             }
         });      
