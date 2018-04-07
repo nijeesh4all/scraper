@@ -22,7 +22,7 @@ class Scrapper_airdropster {
                     const airdrop_symbol = airdrop_name[1].replace(')','').trim();
                     airdrop_name = airdrop_name[0].trim();
                     
-                    const airdrop_value = airdrop_div.find('p.text').html().replace('Estimated value :').trim();
+                    const airdrop_value = airdrop_div.find('p.text').html().replace('Estimated value :','').trim();
                     console.log(airdrop_value);
                 })
             }
