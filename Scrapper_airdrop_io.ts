@@ -14,9 +14,9 @@ export default class Scrapper_airdrop_io {
                 $('.inside-article').each((i,element) => {
                     let test :string;
                     let airdrop_object = {};
-                    const regEx = new RegExp('/&apos[\S]{1,}&apos/g'); 
+                    const regEx = /&apos[\S]{1,}&apos/g; 
                     
-                    let reg_url:any = $(element).parent().html()+"";
+                    let reg_url:any = $(element).parent().html().match(regEx)[0];
                     
                     reg_url = regEx.exec(reg_url);
                     if(reg_url) {
