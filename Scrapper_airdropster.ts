@@ -18,9 +18,10 @@ class Scrapper_airdropster {
                     const airdrop_div = $(element);
                     
                     const airdrop_logo = airdrop_div.find('.logo-campaign').first().find('img').attr('src');
-                    const airdrop_name = airdrop_div.find('.title').text() //.first().text();
-
-                    console.log(airdrop_logo,'=>',airdrop_name);
+                    let airdrop_name = airdrop_div.find('.title').text().split('(');
+                    const airdrop_symbol = airdrop_name[1].replace(')','').trim();
+                    airdrop_name = airdrop_name[0].trim();
+                    console.log(airdrop_symbol,'=>',airdrop_name);
                 })
             }
         });      
