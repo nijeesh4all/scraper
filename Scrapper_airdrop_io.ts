@@ -25,7 +25,7 @@ export default class Scrapper_airdrop_io {
                     content.find('ul.req-drop-list > li').each((i,req) => {
                          test = $(req).attr('title');
                          if(test){
-                            test = test.replace(' required','');    
+                            test = test.replace(' required','').toLowerCase();    
                             airdrop_requirment[test] = true;
                          }
                     });
