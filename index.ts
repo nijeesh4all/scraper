@@ -71,6 +71,7 @@ function isInList(object) {
     for (let index = 0; index < tokens.length; index++) {
         const element = tokens[index];
         if(element.name == object.name){
+            object.id = element.id;
             if(JSON.stringify(object) ==JSON.stringify(element))
                 return true
         }
