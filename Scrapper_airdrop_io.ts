@@ -57,13 +57,14 @@ export default class Scrapper_airdrop_io {
                             const  dec_page = $(dec_html).find('.inside-article').first();
                             
                             //info
+                            const info = $(dec_page).find('.airdrop-info').first().html();
                             const start = $(dec_page).find('.fa-calendar').first().html();
                             const platform = $(dec_page).find('.fa-desktop').first().html();
 
                             //description
                             const description_text = $(dec_page).find('.drop-features > p').text();
 
-
+                            console.log(info);
                             console.log(start);
                             console.log(platform);
                             console.log(description_text);
