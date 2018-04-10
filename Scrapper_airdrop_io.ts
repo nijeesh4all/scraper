@@ -73,15 +73,46 @@ export default class Scrapper_airdrop_io {
                             // console.log(description_text);
                             // console.log(reg_url);
 
-                            const ico_info = $(dec_html).find('.airdrop-list>ul').find('li').each((ind,htm) => {
-                               console.log($(htm).text()) 
+                            const ico_info = $(dec_html).find('.airdrop-list>ul').find('li');
+                            console.log(ico_info.length)
+                            ico_info.each((ind,htm) => {
+                               const li_element = $(htm);
+                               const data:string = li_element.text();
+                               let flag = -1;
+
+                               if (data.indexOf('Ticker')!= -1) flag =1;
+                               else if(data.indexOf('Website')!= -1) flag = 0;
+                               else if (data.indexOf('Twitter')!= -1) flag =2;
+                               else if (data.indexOf('Facebook')!= -1) flag =3;
+                               else if (data.indexOf('Telegram Group')!= -1) flag =4;
+                               else if (data.indexOf('Discord Chat')!= -1) flag =5;
+                               else if (data.indexOf('Reddit')!= -1) flag =6;
+                               else if (data.indexOf('Medium')!= -1) flag =7;
+
+                               switch (flag) {
+                                case -1:
+                                break;   
+                                case 1:
+                                    {
+                                        airdrop_object['symbol'] = data.split(":")[1].trim()
+                                    }
+                                case 2:
+                                    {
+                                        airdrop_object['website'] = data.split(':')[1].trim()
+                                    }
+                                default:
+                                    {
+                                        airdrop_object[data.toLowerCase().replace(':','')+"_url"] = li_element.find('a').arrt('href');
+                                    }
+                                
+                               }
+                               console.log(airdrop_object)
+                               
                             });
-                            
-                            //console.log(ico_info);
-                            console.log('-------')
+
                         }
                     });
-                    //console.log(airdrop_object);
+                    console.log("---------");
                 });
             }
         });      
