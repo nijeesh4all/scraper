@@ -98,7 +98,7 @@ export default class Scrapper_airdrop_io {
                                     }
                                 case 0:
                                     {
-                                        airdrop_object['website'] = data.split(':')[1].trim(); break;
+                                        airdrop_object['website'] = data.split(':').shift().toString().replace(',','').trim(); break;
                                     }
                                 default:
                                     {
