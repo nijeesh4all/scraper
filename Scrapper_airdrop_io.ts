@@ -57,15 +57,14 @@ export default class Scrapper_airdrop_io {
                             const  dec_page = $(dec_html).find('.inside-article').first();
                             
                             //info
-                            const info = $(dec_page).find('.airdrop-info > ul').children('li');
-                            const start_date = info.get(1).text().replace('Airdrop starts ','')
-                            const platform = info.get(4)
+                            const info = $(dec_page).find('.airdrop-info > ul').children('li').first();
+                            const start_date = info.next().text().replace('Airdrop starts ','')
+                            const platform = info.next().next().next();
                             //description
                             const description_text = $(dec_page).find('.drop-features > p').text();
 
                             console.log(info);
                             console.log(start_date);
-                            console.log(platform)
                             console.log(description_text);
                             console.log(reg_url);
                             console.log('-------')
