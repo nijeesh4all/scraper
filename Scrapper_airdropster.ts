@@ -31,7 +31,7 @@ export default class  Scrapper_airdropster {
                         icon_url:airdrop_logo,
                         reg_url:reg_url
                     }
-                    callback(airdrop_object)
+                    //callback(airdrop_object)
                 })
             }
         });      

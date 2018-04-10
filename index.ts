@@ -15,22 +15,46 @@ const config = {
   Firebase.initializeApp(config);
   const database = Firebase.database();
 
+
+let count =0;
+
+var tokens = [];
+
+database.ref('toPublish').on('value',result=>{
+    var object = result.val();
+    for (const key in object) {
+        if (object.hasOwnProperty(key)) {
+            const element = object[key];
+            tokens.push(element)    
+        }
+    }
+})
+
 new Scrapper_airdrop_io('https://airdrops.io/latest/').scrap(updateToFirebase);
 new Scrapper_airdropster('https://www.airdropster.com/?sort=rating').scrap(updateToFirebase);
 
-let count =0;
+
 function updateToFirebase(object){
-    const update ={};
-    const id = randomString(5,'#aA')
-    object['id'] = id;
-    object['addedOn'] = new Date();
-    update[id] = object;
-    database.ref('/toPublish').update(update)
-    .then(result => {
-        console.log(count++,") ",object.name+" Added");
-    });
+
+    if(! isInList(object.name)) {
+        const update ={};
+        const id = randomString(5,'#aA')
+        object['id'] = id;
+        object['addedOn'] = new Date();
+        update[id] = object;
+        database.ref('/toPublish').update(update)
+        .then(result => {
+            console.log(count++,") ",object.name+" Added");
+        });
+    } else {
+        console.log(object.name,' is Already in List');
+    }
 }
 
+function updateExpiredAirdrop(id) {
+    const update = {expired:true};
+    database.ref('/toPublish/'+id).update(update);
+}
   
 function randomString(length, chars) {
     let mask = '';
@@ -41,4 +65,14 @@ function randomString(length, chars) {
     let result = '';
     for (let i = length; i > 0; --i) { result += mask[Math.floor(Math.random() * mask.length)]; }
     return result;
+}
+
+function isInList(name) {
+    for (let index = 0; index < tokens.length; index++) {
+        const element = tokens[index];
+        if(element.name == name){
+            return true;
+        }
+    }
+    return false;
 }
