@@ -1,6 +1,8 @@
 import * as cheerio from 'cheerio';
 import * as request from 'request'
 
+
+
 export default class Scrapper_airdrop_io {
     private uri: string;
     constructor(uri : string) {
@@ -29,6 +31,7 @@ export default class Scrapper_airdrop_io {
                     const content = $(airdrop.find('.air-content-front').first());
                     
                     const airdrop_name = content.find('a > h3').html()
+                    const airdrop_description_url = content.find('a > h3').attr('href');
                     const airdrop_value  = content.find('.est-value').first().find('span').text()
                     const airdrop_requirment = {};
                     
@@ -48,7 +51,9 @@ export default class Scrapper_airdrop_io {
                         reg_url:reg_url
                     }
                     
-                    callback(airdrop_object)
+                    ///Geting the description
+                    console.log("airdrop_url", airdrop_description_url)
+                    //callback(airdrop_object)
                 });
             }
         });      
