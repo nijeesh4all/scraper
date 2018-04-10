@@ -73,7 +73,9 @@ export default class Scrapper_airdrop_io {
                             // console.log(description_text);
                             // console.log(reg_url);
 
-                            const ico_info = $(dec_html).find('.airdrop-list>ul').find('li').each(console.log);
+                            const ico_info = $(dec_html).find('.airdrop-list>ul').find('li').each((ind,htm) => {
+                               console.log($(htm).text()) 
+                            });
                             
                             //console.log(ico_info);
                             console.log('-------')
