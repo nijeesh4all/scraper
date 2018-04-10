@@ -25,7 +25,8 @@ export default class Scrapper_airdrop_io {
                     }else{
                         return null;
                     }
-                    const isExpired = $(element).parent().attr('class').indexOf('exclusive');
+                    const isExclusive = $(element).parent().attr('class').indexOf('exclusive')!= -1;
+                    
                     const airdrop = $(element).find('.air-wrapper').first();
                     const img_url = airdrop.find('.air-thumbnail').first().find('img').attr('src');
                     const content = $(airdrop.find('.air-content-front').first());
@@ -48,12 +49,10 @@ export default class Scrapper_airdrop_io {
                         icon_url:img_url,
                         value:airdrop_value,
                         requirements:airdrop_requirment,
-                        reg_url:reg_url
+                        reg_url:reg_url,
+                        isExclusive:isExclusive
                     }
-                    
-                    ///Geting the description
-                    console.log(isExpired)
-                    //callback(airdrop_object)
+                    console.log(airdrop_object);
                 });
             }
         });      
