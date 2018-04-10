@@ -2,7 +2,6 @@ import * as cheerio from 'cheerio';
 import * as request from 'request'
 
 
-
 export default class Scrapper_airdrop_io {
     private uri: string;
     constructor(uri : string) {
@@ -55,8 +54,17 @@ export default class Scrapper_airdrop_io {
 
                     request(reg_url,(dec_error,dec_response,dec_html) => {
                         if(!dec_error && dec_response.statusCode == 200){
-                            const  dec_page = $(dec_html).find('.inside-article').first().html();
-                            console.log(dec_page)
+                            const  dec_page = $(dec_html).find('.inside-article').first();
+                            
+                            //info
+                            const start = $(dec_page).find('.fa-calendar').text();
+                            const platform = $(dec_page).find('.fa-desktop').text();
+
+                            //description
+                            const description_text = $(dec_page).find('.drop-features > p').text();
+
+
+                            console.log(start," ",platform," ",description_text);
                         }
                     });
                     //console.log(airdrop_object);
