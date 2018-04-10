@@ -108,7 +108,7 @@ export default class Scrapper_airdrop_io {
                                     }
                                 
                                }
-                               console.log(airdrop_object)
+                               callback(airdrop_object)
                                
                             });
 
