@@ -102,7 +102,7 @@ export default class Scrapper_airdrop_io {
                                     }
                                 default:
                                     {
-                                        airdrop_object[data.toLowerCase().replace(':','')+"_url"] = li_element.find('a').arrt('href');
+                                        airdrop_object[data.toLowerCase().replace(':','')+"_url"] = li_element.find('a').attr('href');
                                     }
                                 
                                }
