@@ -17,17 +17,9 @@ const config = {
 
 
 let count =0;
-
-var tokens = [];
-
+let object:any = {};
 database.ref('toPublish').on('value',result=>{
-    var object = result.val();
-    for (const key in object) {
-        if (object.hasOwnProperty(key)) {
-            const element = object[key];
-            tokens.push(element)    
-        }
-    }
+    object = result.val();
 })
 
 new Scrapper_airdrop_io('https://airdrops.io/latest/').scrap(updateToFirebase);
@@ -36,19 +28,19 @@ new Scrapper_airdropster('https://www.airdropster.com/?sort=rating').scrap(updat
 
 function updateToFirebase(object){
 
-    if(! isInList(object)) {
+    
+        isInList(object);
+
         const update ={};
         const id = randomString(5,'#aA')
-        object['id'] = id;
+        if(!object.id)
+            object['id'] = id;
         object['addedOn'] = new Date();
-        update[id] = object;
+        update[object.id] = object;
         database.ref('/toPublish').update(update)
         .then(result => {
             console.log(count++,") ",object.name+" Added");
         });
-    } else {
-        console.log(object.name,' is Already in List');
-    }
 }
 
 function updateExpiredAirdrop(id) {
@@ -67,16 +59,16 @@ function randomString(length, chars) {
     return result;
 }
 
-function isInList(object) {
-    for (let index = 0; index < tokens.length; index++) {
-        const element = tokens[index];
-        if(element.name == object.name){
-            
-            if(JSON.stringify(object) ==JSON.stringify(element))
-                return true
-            else
-                object.id = element.id;
+function isInList(airdrop) {
+    let flag = false;
+    for (const key in object) {
+        if (object.hasOwnProperty(key)) {
+            const element = object[key];
+            if(element.name == airdrop.name) {
+                flag = true;
+                object[element.id] = airdrop
+                airdrop['id'] = element.id; 
+            }
         }
     }
-    return false;
 }
