@@ -86,7 +86,7 @@ export default class Scrapper_airdrop_io {
                                else if (data.indexOf('Facebook')!= -1) flag =3;
                                else if (data.indexOf('Telegram Group')!= -1) flag =4;
                                else if (data.indexOf('Discord Chat')!= -1) flag =5;
-                               else if (data.indexOf('Reddit')!= -1) flag =6;
+                               //else if (data.indexOf('Reddit')!= -1) flag =6;
                                else if (data.indexOf('Medium')!= -1) flag =7;
 
                                switch (flag) {
@@ -98,12 +98,12 @@ export default class Scrapper_airdrop_io {
                                     }
                                 case 0:
                                     {
-                                        airdrop_object['website'] = data.split(':').shift().toString().replace(',','').trim(); break;
+                                        airdrop_object['website'] = data.split(':').toString().replace(',','').replace('Website','').trim(); break;
                                     }
                                 default:
                                     {
                                         if(data.indexOf('Ticker')!=-1) break;
-                                        airdrop_object[data.toLowerCase().replace(':','').replace('  ',' ').replace(" ","_").trim()+"_url"] = li_element.find('a').attr('href');
+                                        airdrop_object[data.toLowerCase().replace(':','').replace(" ","_").replace('__','_').trim()+"_url"] = li_element.find('a').attr('href');
                                     }
                                 
                                }
