@@ -60,7 +60,7 @@ export default class Scrapper_airdrop_io {
                             //info
                             const info = $(dec_page).find('.airdrop-info > ul').children('li').first();
                             const start_date = info.next().text().replace('Airdrop starts ','')
-                            const platform = info.next().next().next().text()
+                            const platform = info.next().next().next().next().text()
                             //description
                             let description_text = $(dec_page).find('.drop-features > p').text();
                             description_text += "\n"+$(dec_page).find('.drop-features').next().text();
