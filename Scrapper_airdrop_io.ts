@@ -52,8 +52,8 @@ export default class Scrapper_airdrop_io {
                     }
                     
                     ///Geting the description
-                    console.log("airdrop_url", airdrop_description_url)
-                    //callback(airdrop_object)
+                    //console.log("airdrop_url", airdrop_description_url)
+                    callback(airdrop_object)
                 });
             }
         });      
