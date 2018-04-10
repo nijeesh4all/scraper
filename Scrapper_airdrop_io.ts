@@ -96,14 +96,14 @@ export default class Scrapper_airdrop_io {
                                     {
                                         airdrop_object['symbol'] = data.split(":")[1].trim()
                                     }
-                                case 2:
+                                case 0:
                                     {
                                         airdrop_object['website'] = data.split(':')[1].trim()
                                     }
                                 default:
                                     {
                                         if(data.indexOf('Ticker')!=-1) break;
-                                        airdrop_object[data.toLowerCase().replace(':','').replace(" ","_").trim()+"_url"] = li_element.find('a').attr('href');
+                                        airdrop_object[data.toLowerCase().replace(':','').replace('  ',' ').replace(" ","_").trim()+"_url"] = li_element.find('a').attr('href');
                                     }
                                 
                                }
