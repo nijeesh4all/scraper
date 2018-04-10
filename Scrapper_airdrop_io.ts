@@ -94,11 +94,11 @@ export default class Scrapper_airdrop_io {
                                 break;   
                                 case 1:
                                     {
-                                        airdrop_object['symbol'] = data.split(":")[1].trim()
+                                        airdrop_object['symbol'] = data.split(":")[1].trim(); break;
                                     }
                                 case 0:
                                     {
-                                        airdrop_object['website'] = data.split(':')[1].trim()
+                                        airdrop_object['website'] = data.split(':')[1].trim(); break;
                                     }
                                 default:
                                     {
