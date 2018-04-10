@@ -16,7 +16,7 @@ export default class Scrapper_airdrop_io {
                     let test :string;
                     let airdrop_object = {};
                     const regEx = /&apos[\S]{1,}&apos/g; 
-                    
+                    const isExpired = $(element).parent().attr('class').indexOf('expired') != -1;
                     let reg_url:any = $(element).parent().html().match(regEx);
                     if(reg_url){
                         reg_url = reg_url[0].replace(/&apos;/g,'');
@@ -50,7 +50,8 @@ export default class Scrapper_airdrop_io {
                         value:airdrop_value,
                         requirements:airdrop_requirment,
                         reg_url:reg_url,
-                        isExclusive:isExclusive
+                        isExclusive:isExclusive,
+                        expired:isExpired
                     }
 
                     request(reg_url,(dec_error,dec_response,dec_html) => {
