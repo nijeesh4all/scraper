@@ -25,7 +25,7 @@ export default class Scrapper_airdrop_io {
                     }else{
                         return null;
                     }
-
+                    const isExpired = $(html).find('article').html();
                     const airdrop = $(element).find('.air-wrapper').first();
                     const img_url = airdrop.find('.air-thumbnail').first().find('img').attr('src');
                     const content = $(airdrop.find('.air-content-front').first());
@@ -52,8 +52,8 @@ export default class Scrapper_airdrop_io {
                     }
                     
                     ///Geting the description
-                    //console.log("airdrop_url", airdrop_description_url)
-                    callback(airdrop_object)
+                    console.log(isExpired)
+                    //callback(airdrop_object)
                 });
             }
         });      
