@@ -64,7 +64,10 @@ export default class Scrapper_airdrop_io {
                             const description_text = $(dec_page).find('.drop-features > p').text();
 
 
-                            console.log(start+" "+platform+" "+description_text);
+                            console.log(start);
+                            console.log(platform);
+                            console.log(description_text);
+                            console.log('-------')
                         }
                     });
                     //console.log(airdrop_object);
