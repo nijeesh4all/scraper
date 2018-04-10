@@ -66,14 +66,15 @@ export default class Scrapper_airdrop_io {
 
                             //Steps
 
-                            const steps = $(dec_page).find('.airdrop-guide').first().html();
+                            const steps_html = $(dec_page).find('.airdrop-guide').first().html();
 
                             //console.log(info);
                             // console.log(start_date);
                             // console.log(description_text);
                             // console.log(reg_url);
-                            
-                            console.log(steps)
+
+                            const ico_info = dec_page.next().next().html()
+                            console.log(ico_info);
                             console.log('-------')
                         }
                     });
