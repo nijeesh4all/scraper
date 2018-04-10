@@ -44,6 +44,7 @@ export default class Scrapper_airdrop_io {
                     });
 
                     airdrop_object = {
+                        source:'http://airdrops.io',
                         name:airdrop_name,
                         icon_url:img_url,
                         value:airdrop_value,
@@ -68,10 +69,10 @@ export default class Scrapper_airdrop_io {
 
                             const steps_html = $(dec_page).find('.airdrop-guide').first().html();
 
-                            //console.log(info);
-                            // console.log(start_date);
-                            // console.log(description_text);
-                            // console.log(reg_url);
+                            airdrop_object['start_date'] = start_date;
+                            airdrop_object['platform'] = platform;
+                            airdrop_object['decription'] = description_text;
+                            airdrop_object['steps_html'] = steps_html;
 
                             const ico_info = $(dec_html).find('.airdrop-list>ul').find('li');
                             console.log(ico_info.length)
