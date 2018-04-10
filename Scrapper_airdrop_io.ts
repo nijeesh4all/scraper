@@ -52,7 +52,14 @@ export default class Scrapper_airdrop_io {
                         reg_url:reg_url,
                         isExclusive:isExclusive
                     }
-                    console.log(airdrop_object);
+
+                    request(reg_url,(dec_error,dec_response,dec_html) => {
+                        if(!dec_error && dec_response.statusCode == 200){
+                            const  dec_page = $(dec_html).find('.inside-article').first().html();
+                            console.log(dec_page)
+                        }
+                    });
+                    //console.log(airdrop_object);
                 });
             }
         });      
