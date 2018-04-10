@@ -76,8 +76,8 @@ export default class Scrapper_airdrop_io {
                             const ico_info = $(dec_html).find('.airdrop-list>ul').find('li');
                             console.log(ico_info.length)
                             ico_info.each((ind,htm) => {
-                               const li_element = $(htm);
-                               const data:string = li_element.text();
+                               let li_element = $(htm);
+                               let data:string = li_element.text();
                                let flag = -1;
 
                                if (data.indexOf('Ticker')!= -1) flag =1;
@@ -102,7 +102,7 @@ export default class Scrapper_airdrop_io {
                                     }
                                 default:
                                     {
-                                        airdrop_object[data.toLowerCase().replace(':','')+"_url"] = li_element.find('a').attr('href');
+                                        airdrop_object[data.toLowerCase().replace(':','').trim()+"_url"] = li_element.find('a').attr('href');
                                     }
                                 
                                }
