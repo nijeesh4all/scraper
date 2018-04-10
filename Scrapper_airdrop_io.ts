@@ -62,14 +62,18 @@ export default class Scrapper_airdrop_io {
                             const platform = info.next().next().next().text()
                             //description
                             let description_text = $(dec_page).find('.drop-features > p').text();
-                            description_text += $(dec_page).find('.drop-features').next().text();
+                            description_text += "\n"+$(dec_page).find('.drop-features').next().text();
 
+                            //Steps
 
+                            const steps = $(dec_page).find('.airdrop-guide').first().html();
 
                             //console.log(info);
-                            console.log(start_date);
-                            console.log(description_text);
-                            console.log(reg_url);
+                            // console.log(start_date);
+                            // console.log(description_text);
+                            // console.log(reg_url);
+                            
+                            console.log(steps)
                             console.log('-------')
                         }
                     });
