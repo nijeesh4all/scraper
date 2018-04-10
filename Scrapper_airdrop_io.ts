@@ -25,7 +25,7 @@ export default class Scrapper_airdrop_io {
                     }else{
                         return null;
                     }
-                    const isExpired = $(html).parent().find('.exclusive .inside-article::after').html()///.attr('class');
+                    const isExpired = $(element).parent().attr('class');
                     const airdrop = $(element).find('.air-wrapper').first();
                     const img_url = airdrop.find('.air-thumbnail').first().find('img').attr('src');
                     const content = $(airdrop.find('.air-content-front').first());
