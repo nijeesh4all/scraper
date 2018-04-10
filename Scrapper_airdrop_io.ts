@@ -98,12 +98,12 @@ export default class Scrapper_airdrop_io {
                                     }
                                 case 0:
                                     {
-                                        airdrop_object['website'] = data.split(':').toString().replace(',','').replace('Website','').trim(); break;
+                                        airdrop_object['website'] = data.split(':').toString().replace(',','').replace('Website','').replace('https,','http:').trim(); break;
                                     }
                                 default:
                                     {
                                         if(data.indexOf('Ticker')!=-1) break;
-                                        airdrop_object[data.toLowerCase().replace(':','').replace(" ","_").replace('__','_').trim()+"_url"] = li_element.find('a').attr('href');
+                                        airdrop_object[(data.toLowerCase().replace(':','').replace(" ","_").trim()+"_url").replace('__','_')] = li_element.find('a').attr('href');
                                     }
                                 
                                }
