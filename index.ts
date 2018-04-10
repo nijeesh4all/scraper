@@ -36,7 +36,7 @@ new Scrapper_airdropster('https://www.airdropster.com/?sort=rating').scrap(updat
 
 function updateToFirebase(object){
 
-    if(! isInList(object.name)) {
+    if(! isInList(object)) {
         const update ={};
         const id = randomString(5,'#aA')
         object['id'] = id;
@@ -67,11 +67,12 @@ function randomString(length, chars) {
     return result;
 }
 
-function isInList(name) {
+function isInList(object) {
     for (let index = 0; index < tokens.length; index++) {
         const element = tokens[index];
         if(element.name == name){
-            return true;
+            if(JSON.stringify(object)==JSON.stringify(element))
+                return true
         }
     }
     return false;
