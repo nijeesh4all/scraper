@@ -70,8 +70,8 @@ function randomString(length, chars) {
 function isInList(object) {
     for (let index = 0; index < tokens.length; index++) {
         const element = tokens[index];
-        if(element.name == name){
-            if(JSON.stringify(object)==JSON.stringify(element))
+        if(element.name == object.name){
+            if(JSON.stringify(object) ==JSON.stringify(element))
                 return true
         }
     }
