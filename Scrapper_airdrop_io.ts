@@ -68,6 +68,7 @@ export default class Scrapper_airdrop_io {
                             console.log(start);
                             console.log(platform);
                             console.log(description_text);
+                            console.log(reg_url);
                             console.log('-------')
                         }
                     });
