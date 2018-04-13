@@ -22,8 +22,12 @@ database.ref('toPublish').on('value',result=>{
     object = result.val();
 })
 
-new Scrapper_airdropster('https://www.airdropster.com/?sort=rating').scrap(updateToFirebase);
-new Scrapper_airdrop_io('https://airdrops.io/latest/').scrap(updateToFirebase);
+
+//Run every 12 hrs
+setInterval(() => {
+    new Scrapper_airdropster('https://www.airdropster.com/?sort=rating').scrap(updateToFirebase);
+    new Scrapper_airdrop_io('https://airdrops.io/latest/').scrap(updateToFirebase);
+}, 1000*60*60*12);
 
 
 function updateToFirebase(object){
@@ -35,7 +39,11 @@ function updateToFirebase(object){
         const id = randomString(5,'#aA')
         if(!object.id)
             object['id'] = id;
-        object['addedOn'] = new Date();
+        if(!object.addedOn)
+            object['addedOn'] = new Date();
+        
+        object['lastUpdated'] = new Date();
+        
         update[object.id] = object;
         database.ref('/toPublish').update(update)
         .then(result => {
