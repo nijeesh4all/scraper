@@ -17,7 +17,9 @@ const config = {
 
 
 let count =0;
-let object:any = {};
+let element:any = {};
+var object:object = {}
+
 database.ref('toPublish').on('value',result=>{
     object = result.val();
 })
@@ -32,22 +34,25 @@ setInterval(() => {
 }, 1000*60*60*12);
 
 
-function updateToFirebase(object){
+function updateToFirebase(airdrop_object){
         
-        object = isInList(object);
         const update ={};
-        const id = randomString(5,'#aA')
-        if(!object.id)
-            object['id'] = id;
-        if(!object.addedOn)
-            object['addedOn'] = new Date();
+        let id:string = randomString(5,'#aA')
         
-        object['lastUpdated'] = new Date();
+        if(id == null){
+            id = getAirdropId(airdrop_object);
+            airdrop_object['id'] = id;
+            airdrop_object['addedOn'] = new Date();
+            object[id] = airdrop_object;
+        }   else {
+            syncWithOldData(id,airdrop_object);
+        }
         
-        update[object.id] = object;
+        airdrop_object['lastUpdated'] = new Date();
+        update[airdrop_object.id] = airdrop_object;
         database.ref('/toPublish').update(update)
         .then(result => {
-            console.log(count++,") ",object.name+" Added");
+            console.log(count++,") ",airdrop_object.name+" Added");
         });
 }
 
@@ -67,22 +72,32 @@ function randomString(length, chars) {
     return result;
 }
 
-function isInList(airdrop) {
-    let flag = false;
+function getAirdropId(airdrop_object){
+    let airdropId = null;
     for (const key in object) {
         if (object.hasOwnProperty(key)) {
             const element = object[key];
-            if(element.name == airdrop.name) {
-                for (const k in element) {
-                    if (element.hasOwnProperty(k)) {
-                        const e = element[k];
-                        element[key] = airdrop[key];
-                    }
-                }
-                airdrop = element;
-            }
+            if(element.name == airdrop_object.name)
+                airdropId = element.id;    
         }
     }
-    
-    return airdrop;
+    return airdropId;
+}
+
+function syncWithOldData(id,airdrop_object) {
+    if(object.hasOwnProperty(id)){
+        const airdrop = object[id];
+        
+        for (const key in airdrop_object) {
+            if (airdrop_object.hasOwnProperty(key)) {
+                const element = airdrop_object[key];
+                airdrop[key] = airdrop_object[key];
+            }
+        }
+
+        airdrop_object = airdrop;
+
+    } else {
+        throw new Error('Invalid ID or ID not found in The object');
+    }
 }
