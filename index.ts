@@ -16,7 +16,8 @@ const config = {
   const database = Firebase.database();
 
 
-let count =0;
+let total_count =0;
+let sessionCount = 0;
 let element:any = {};
 var object:object = {}
 
@@ -28,6 +29,7 @@ new Scrapper_airdrop_io('https://airdrops.io/hot/').scrap(updateToFirebase);
 
 //Run every 12 hrs
 setInterval(() => {
+    sessionCount = 0;
     //new Scrapper_airdropster('https://www.airdropster.com/?sort=rating').scrap(updateToFirebase);
     new Scrapper_airdrop_io('https://airdrops.io/hot/').scrap(updateToFirebase);
     new Scrapper_airdrop_io('https://airdrops.io/latest/').scrap(updateToFirebase);
@@ -37,10 +39,10 @@ setInterval(() => {
 function updateToFirebase(airdrop_object){
         
         const update ={};
-        let id:string = randomString(5,'#aA')
+        let id:string = getAirdropId(airdrop_object); 
         
         if(id == null){
-            id = getAirdropId(airdrop_object);
+            id = randomString(5,'#aA')
             airdrop_object['id'] = id;
             airdrop_object['addedOn'] = new Date();
             object[id] = airdrop_object;
@@ -52,7 +54,7 @@ function updateToFirebase(airdrop_object){
         update[airdrop_object.id] = airdrop_object;
         database.ref('/toPublish').update(update)
         .then(result => {
-            console.log(count++,") ",airdrop_object.name+" Added");
+            console.log(total_count++,"---"+(sessionCount++)+") ",airdrop_object.name+" Added");
         });
 }
 
