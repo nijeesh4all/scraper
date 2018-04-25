@@ -34,7 +34,7 @@ setInterval(() => {
 
 function updateToFirebase(object){
         
-        isInList(object);
+        object = isInList(object);
         const update ={};
         const id = randomString(5,'#aA')
         if(!object.id)
@@ -73,10 +73,16 @@ function isInList(airdrop) {
         if (object.hasOwnProperty(key)) {
             const element = object[key];
             if(element.name == airdrop.name) {
-                flag = true;
-                object[element.id] = airdrop
-                airdrop['id'] = element.id; 
+                for (const k in element) {
+                    if (element.hasOwnProperty(k)) {
+                        const e = element[k];
+                        e[key] = airdrop[key];
+                    }
+                }
+                airdrop = element;
             }
         }
     }
+    
+    return airdrop;
 }
