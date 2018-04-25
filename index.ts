@@ -21,9 +21,13 @@ let sessionCount = 0;
 let element:any = {};
 var object:object = {}
 
-database.ref('toPublish').on('value',result=>{
-    object = result.val();
-})
+
+syncObject();
+function syncObject(){
+    database.ref('toPublish').on('value',result=>{
+        object = result.val();
+    })
+}
 
 new Scrapper_airdrop_io('https://airdrops.io/hot/').scrap(updateToFirebase);
 
@@ -41,26 +45,25 @@ function updateToFirebase(airdrop_object){
         const update ={};
         let id:string = getAirdropId(airdrop_object); 
         
+        console.log(airdrop_object.name+"-->"+id)
+
         if(id == null){
-            id = randomString(5,'#aA')
+            id = randomString(6,'#aA')
             airdrop_object['id'] = id;
             airdrop_object['addedOn'] = new Date();
-            
-            if(object == null){
-                object = {};
+            if(object==null){
+                object = {}
             }
-            
             object[id] = airdrop_object;
         }   else {
             syncWithOldData(id,airdrop_object);
         }
         
-        airdrop_object['lastUpdated'] = new Date();
-        update[airdrop_object.id] = airdrop_object;
-        database.ref('/toPublish').update(update)
+        database.ref('/toPublish').update(object)
         .then(result => {
             console.log(total_count++,"---"+(sessionCount++)+") ",airdrop_object.name+" Added");
         });
+
 }
 
 function updateExpiredAirdrop(id) {
