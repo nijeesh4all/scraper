@@ -76,7 +76,7 @@ function isInList(airdrop) {
                 for (const k in element) {
                     if (element.hasOwnProperty(k)) {
                         const e = element[k];
-                        e[key] = airdrop[key];
+                        element[key] = airdrop[key];
                     }
                 }
                 airdrop = element;
