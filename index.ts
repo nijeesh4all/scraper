@@ -45,6 +45,11 @@ function updateToFirebase(airdrop_object){
             id = randomString(5,'#aA')
             airdrop_object['id'] = id;
             airdrop_object['addedOn'] = new Date();
+            
+            if(object == null){
+                object = {};
+            }
+            
             object[id] = airdrop_object;
         }   else {
             syncWithOldData(id,airdrop_object);
